@@ -1,6 +1,7 @@
 require_relative './dust_scrapper'
 require_relative './weather_scrapper'
 require 'date'
+require 'dotenv/load'
 require 'json'
 require 'net/http'
 require 'uri'
