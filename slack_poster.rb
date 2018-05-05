@@ -7,8 +7,6 @@ require 'uri'
 
 module SlackWeather
   class SlackPoster
-    WEBHOOK_URL = 'https://hooks.slack.com/services/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'.freeze
-
     def self.post
       dust_forecast = DustScrapper.forecast
       weather_forecast = WeatherScrapper.forecast
@@ -36,7 +34,7 @@ module SlackWeather
 
       payload = JSON.generate(text: msg)
 
-      Net::HTTP.post_form(URI(WEBHOOK_URL), payload: payload)
+      Net::HTTP.post_form(URI(ENV.fetch('WEBHOOK_URL')), payload: payload)
     end
   end
 end
