@@ -4,14 +4,25 @@ require 'date'
 
 module SlackWeather
   class MessageComposer
+    DAYS = %w[
+      Δευτέρα
+      Τρίτη
+      Τετάρτη
+      Πέμπτη
+      Παρασκευή
+      Σάββατο
+      Κυριακή
+    ].freeze
+
     def self.message
       dust_forecast = DustScrapper.forecast
       weather_forecast = WeatherScrapper.forecast
 
       tomorrow = Date.today + 1
+      day = DAYS[tomorrow.cwday - 1]
 
       lines = []
-      lines << "Ο καιρός για αύριο #{tomorrow.strftime('%d/%m')}:"
+      lines << "Ο καιρός για αύριο #{day} #{tomorrow.strftime('%d/%m')}:"
       lines << ""
       lines.concat(
         weather_forecast.map { |hour, forecast|
