@@ -26,13 +26,23 @@ module SlackWeather
       lines << ''
       lines.concat(
         weather_forecast.map { |hour, forecast|
-          '*%{hr}* %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}, %{c}' % {
+          emoji =
+            case forecast[:conditions]
+            when 'ΑΡΑΙΗ ΣΥΝΝΕΦΙΑ' then ':sun_small_cloud:'
+            when 'ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ' then ':sun_behind_cloud:'
+            when 'ΣΥΝΝΕΦΙΑΣΜΕΝΟΣ' then ':cloud:'
+            when 'ΑΣΘΕΝΗΣ ΒΡΟΧΗ', 'ΒΡΟΧΗ' then ':rain_cloud:'
+            when 'ΚΑΤΑΙΓΙΔΑ' then ':thunder_cloud_and_rain:'
+            end
+
+          '*%{hr}* %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}, %{c} %{e}' % {
             hr: '%02d:00' % hour,
             t: forecast[:temperature],
             h: forecast[:humidity],
             w: forecast[:wind],
             d: dust_forecast[hour],
-            c: forecast[:conditions]
+            c: forecast[:conditions],
+            e: emoji
           }
         }
       )
