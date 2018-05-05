@@ -22,7 +22,7 @@ module SlackWeather
       day = DAYS[tomorrow.cwday - 1]
 
       lines = []
-      lines << "Ο καιρός για αύριο #{day} #{tomorrow.strftime('%d/%m')}:"
+      lines << "Ο καιρός για αύριο #{day} #{tomorrow.day}/#{tomorrow.month}:"
       lines << ""
       lines.concat(
         weather_forecast.map { |hour, forecast|
