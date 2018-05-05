@@ -1,5 +1,5 @@
-require_relative './dust_scrapper'
-require_relative './weather_scrapper'
+require_relative 'dust_scrapper'
+require_relative 'weather_scrapper'
 require 'date'
 
 module SlackWeather
