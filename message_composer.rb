@@ -23,10 +23,10 @@ module SlackWeather
 
       lines = []
       lines << "Ο καιρός για αύριο #{day} #{tomorrow.day}/#{tomorrow.month}:"
-      lines << ""
+      lines << ''
       lines.concat(
         weather_forecast.map { |hour, forecast|
-          "*%{hr}* %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}, %{c}" % {
+          '*%{hr}* %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}, %{c}' % {
             hr: '%02d:00' % hour,
             t: forecast[:temperature],
             h: forecast[:humidity],
@@ -36,7 +36,7 @@ module SlackWeather
           }
         }
       )
-      lines << ""
+      lines << ''
       lines << 'Πηγή: http://meteo.gr/cf.cfm?city_id=12'
       lines.join("\n")
     end
