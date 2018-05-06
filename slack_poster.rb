@@ -16,4 +16,3 @@ module SlackWeather
 
   SlackPoster.post(MessageComposer.message)
 end
-
