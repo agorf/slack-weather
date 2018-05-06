@@ -45,7 +45,8 @@ module SlackWeather
       when 'ΑΡΑΙΗ ΣΥΝΝΕΦΙΑ' then ':sun_small_cloud:'
       when 'ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ' then ':sun_behind_cloud:'
       when 'ΣΥΝΝΕΦΙΑΣΜΕΝΟΣ' then ':cloud:'
-      when 'ΑΣΘΕΝΗΣ ΒΡΟΧΗ', 'ΒΡΟΧΗ' then ':rain_cloud:'
+      when 'ΑΣΘΕΝΗΣ ΒΡΟΧΗ' then ':rain_cloud:'
+      when 'ΒΡΟΧΗ' then ':rain_cloud: :rain_cloud:'
       when 'ΚΑΤΑΙΓΙΔΑ' then ':thunder_cloud_and_rain:'
       end
     end
