@@ -24,8 +24,7 @@ module SlackWeather
 
       forecast_rows =
         tr_nodes.map do |tr_node|
-          row_text = tr_node.text.gsub(/^\s*|\s*$/, '')
-          values = row_text.split("\n").uniq
+          values = tr_node.text.gsub(/^\s*|\s*$/, '').split("\n").uniq
           {
             temperature: values[1].to_i,
             humidity: values[2].to_i,
