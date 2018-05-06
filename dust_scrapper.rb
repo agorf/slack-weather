@@ -9,7 +9,7 @@ module SlackWeather
     def self.forecast
       doc = Nokogiri::HTML::Document.parse(open(URL), nil, 'utf-8')
 
-      td_nodes = doc.css('td').select { |td| td.text =~/ΣΚΟΝΗ/ }
+      td_nodes = doc.css('td').select { |td| td.text =~ /ΣΚΟΝΗ/ }
 
       hour = Time.now.hour
 
