@@ -23,15 +23,16 @@ module SlackWeather
       lines << ''
       lines.concat(
         weather_forecast.map { |hour, forecast|
-          '*%{hr}* %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}, %{c} %{e}' % {
-            hr: '%02d:00' % hour,
+          sprintf(
+            '*%{hr}* %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}, %{c} %{e}',
+            hr: sprintf('%02d:00', hour),
             t: forecast[:temperature],
             h: forecast[:humidity],
             w: forecast[:wind],
             d: dust_forecast[hour],
             c: forecast[:conditions],
             e: conditions_emoji(forecast[:conditions])
-          }
+          )
         }
       )
       lines << ''
