@@ -19,7 +19,7 @@ module SlackWeather
       weather_forecast = WeatherScrapper.forecast
 
       lines = []
-      lines << "Ο καιρός για αύριο #{forecast_date}:"
+      lines << "Ο καιρός για αύριο #{forecast_date} στην Αθήνα (κέντρο):"
       lines << ''
       lines.concat(
         weather_forecast.map { |hour, forecast|
