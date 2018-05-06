@@ -18,11 +18,8 @@ module SlackWeather
       dust_forecast = DustScrapper.forecast
       weather_forecast = WeatherScrapper.forecast
 
-      tomorrow = Date.today + 1
-      day = DAYS[tomorrow.cwday - 1]
-
       lines = []
-      lines << "Ο καιρός για αύριο #{day} #{tomorrow.day}/#{tomorrow.month}:"
+      lines << "Ο καιρός για αύριο #{forecast_date}:"
       lines << ''
       lines.concat(
         weather_forecast.map { |hour, forecast|
@@ -50,6 +47,12 @@ module SlackWeather
       when 'ΑΣΘΕΝΗΣ ΒΡΟΧΗ', 'ΒΡΟΧΗ' then ':rain_cloud:'
       when 'ΚΑΤΑΙΓΙΔΑ' then ':thunder_cloud_and_rain:'
       end
+    end
+
+    def self.forecast_date
+      tomorrow = Date.today + 1
+      day = DAYS[tomorrow.cwday - 1]
+      "#{day} #{tomorrow.day}/#{tomorrow.month}"
     end
   end
 end
