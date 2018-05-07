@@ -24,12 +24,13 @@ module SlackWeather
       lines.concat(
         weather_forecast.map { |hour, forecast|
           sprintf(
-            '*%{hr}* %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}, %{c} %{e}',
+            '*%{hr}* %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}%{de}, %{c} %{e}',
             hr: sprintf('%02d:00', hour),
             t: forecast[:temperature],
             h: forecast[:humidity],
             w: forecast[:wind],
             d: dust_forecast[hour],
+            de: dust_emoji(dust_forecast[hour]),
             c: forecast[:conditions],
             e: conditions_emoji(forecast[:conditions])
           )
@@ -49,6 +50,10 @@ module SlackWeather
       when 'ΒΡΟΧΗ' then ':rain_cloud: :rain_cloud:'
       when 'ΚΑΤΑΙΓΙΔΑ' then ':thunder_cloud_and_rain:'
       end
+    end
+
+    def self.dust_emoji(level)
+      return ' :warning:' if %w[ΥΨΗΛΗ ΜΕΣΑΙΑ].include?(level)
     end
 
     def self.forecast_date
