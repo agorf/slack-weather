@@ -24,8 +24,9 @@ module SlackWeather
       lines.concat(
         weather_forecast.map { |hour, forecast|
           sprintf(
-            '*%{hr}* %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}%{de}, %{c} %{e}',
+            '%{hr} %{he} %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}%{de}, %{c} %{e}',
             hr: sprintf('%02d:00', hour),
+            he: hour_emoji(hour),
             t: forecast[:temperature],
             h: forecast[:humidity],
             w: forecast[:wind],
@@ -54,6 +55,10 @@ module SlackWeather
 
     def self.dust_emoji(level)
       return ' :warning:' if %w[ΥΨΗΛΗ ΜΕΣΑΙΑ].include?(level)
+    end
+
+    def self.hour_emoji(hour)
+      ":clock#{hour % 12}:"
     end
 
     def self.forecast_date
