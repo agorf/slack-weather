@@ -18,16 +18,19 @@ module SlackWeather
       dust_forecast = DustScrapper.forecast
       weather_forecast = WeatherScrapper.forecast
 
+      max_temp = weather_forecast.values.map { |f| f[:temperature] }.max
+
       lines = []
       lines << "Ο καιρός στην Αθήνα (κέντρο) για αύριο #{forecast_date}:"
       lines << ''
       lines.concat(
         weather_forecast.map { |hour, forecast|
           sprintf(
-            '%{hr} %{he} %{t}°C, υγρασία %{h}%%, %{w}, σκόνη %{d}%{de}, %{c} %{e}',
+            '%{hr} %{he} %{t}°C%{te}, υγρασία %{h}%%, %{w}, σκόνη %{d}%{de}, %{c} %{e}',
             hr: sprintf('%02d:00', hour),
             he: hour_emoji(hour),
             t: forecast[:temperature],
+            te: forecast[:temperature] == max_temp ? ' :red_circle:' : '',
             h: forecast[:humidity],
             w: forecast[:wind],
             d: dust_forecast[hour],
