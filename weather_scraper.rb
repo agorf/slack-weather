@@ -6,9 +6,7 @@ module SlackWeather
     HOURS = [3, 9, 15, 21].freeze
     URL = 'http://meteo.gr/cf.cfm?city_id=12'.freeze
 
-    def self.forecast
-      doc = Nokogiri::HTML::Document.parse(open(URL), nil, 'utf-8')
-
+    def forecast
       tr_nodes = doc.css('tr.perhour')
 
       hour = Time.now.hour
@@ -34,6 +32,26 @@ module SlackWeather
         end
 
       HOURS.zip(forecast_rows).to_h
+    end
+
+    def sunrise
+      scrape_sunrise_and_sunset! if @sunrise.nil?
+      @sunrise
+    end
+
+    def sunset
+      scrape_sunrise_and_sunset! if @sunset.nil?
+      @sunset
+    end
+
+    private
+
+    def doc
+      @doc ||= Nokogiri::HTML::Document.parse(open(URL), nil, 'utf-8')
+    end
+
+    def scrape_sunrise_and_sunset!
+      @sunrise, @sunset = doc.css('#suncalc2').text.scan(/\d{2}:\d{2}/)
     end
   end
 end

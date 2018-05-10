@@ -16,7 +16,8 @@ module SlackWeather
 
     def self.message
       dust_forecast = DustScraper.forecast
-      weather_forecast = WeatherScraper.forecast
+      weather = WeatherScraper.new
+      weather_forecast = weather.forecast
 
       max_temp = weather_forecast.values.map { |f| f[:temperature] }.max
 
@@ -44,6 +45,9 @@ module SlackWeather
           )
         }
       )
+      lines << ''
+      lines << "Ανατολή: :city_sunrise: #{weather.sunrise} - " \
+        "Δύση: :city_sunset: #{weather.sunset}"
       lines << ''
       lines << 'Πηγή: http://meteo.gr/cf.cfm?city_id=12'
       lines.join("\n")
