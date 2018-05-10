@@ -30,7 +30,7 @@ module SlackWeather
             hr: sprintf('%02d:00', hour),
             he: hour_emoji(hour),
             t: forecast[:temperature],
-            te: forecast[:temperature] == max_temp ? ' :red_circle:' : '',
+            te: forecast[:temperature] == max_temp ? ' :thermometer:' : '',
             h: forecast[:humidity],
             w: forecast[:wind],
             d: dust_forecast[hour],
