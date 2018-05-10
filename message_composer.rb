@@ -1,5 +1,5 @@
-require_relative 'dust_scrapper'
-require_relative 'weather_scrapper'
+require_relative 'dust_scraper'
+require_relative 'weather_scraper'
 require 'date'
 
 module SlackWeather
@@ -15,8 +15,8 @@ module SlackWeather
     ].freeze
 
     def self.message
-      dust_forecast = DustScrapper.forecast
-      weather_forecast = WeatherScrapper.forecast
+      dust_forecast = DustScraper.forecast
+      weather_forecast = WeatherScraper.forecast
 
       max_temp = weather_forecast.values.map { |f| f[:temperature] }.max
 

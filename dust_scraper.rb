@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 module SlackWeather
-  class DustScrapper
+  class DustScraper
     HOURS = [3, 9, 15, 21].freeze
     URL = 'http://meteo.gr/includes/dust-include.cfm?city_id=12'.freeze
 
