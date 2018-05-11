@@ -51,7 +51,9 @@ module SlackWeather
     end
 
     def scrape_sunrise_and_sunset!
-      @sunrise, @sunset = doc.css('#suncalc2').text.scan(/\d{2}:\d{2}/)
+      nodes = doc.css('.forecastright')
+      nodes.shift if Time.now.hour < 21
+      @sunrise, @sunset = nodes[0].text.scan(/\d{2}:\d{2}/)
     end
   end
 end
