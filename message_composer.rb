@@ -69,6 +69,7 @@ module SlackWeather
     def self.conditions_emoji(conditions)
       case conditions
       when 'ΚΑΘΑΡΟΣ' then ':sunny:'
+      when 'ΠΕΡΙΟΡΙΣΜΕΝΗ ΟΡΑΤΟΤΗΤΑ' then ':fog:'
       when 'ΛΙΓΑ ΣΥΝΝΕΦΑ' then ':sun_small_cloud:'
       when 'ΑΡΑΙΗ ΣΥΝΝΕΦΙΑ', 'ΑΡΚΕΤΑ ΣΥΝΝΕΦΑ' then ':sun_behind_cloud:'
       when 'ΣΥΝΝΕΦΙΑΣΜΕΝΟΣ' then ':cloud:'
