@@ -29,6 +29,19 @@ module SlackWeather
           temp = "#{forecast[:temperature]}°C"
           temp = "*#{temp}*" if forecast[:temperature] == max_temp
 
+          if forecast[:wind][:bf] == 0
+            wind = 'ΑΠΝΟΙΑ'
+          else
+            wind = forecast[:wind][:bf].to_s
+
+            if forecast[:wind][:bf] >= 6
+              wind = "*#{wind}*"
+            end
+
+            wind << " Bf #{forecast[:wind][:direction]}" \
+              " (#{forecast[:wind][:kph]} km/h)"
+          end
+
           dust = dust_forecast[hour]
           dust = "*#{dust}*" if %w[ΥΨΗΛΗ ΜΕΣΑΙΑ].include?(dust)
 
@@ -38,7 +51,7 @@ module SlackWeather
             he: hour_emoji(hour),
             t: temp,
             h: forecast[:humidity],
-            w: forecast[:wind],
+            w: wind,
             d: dust,
             c: forecast[:conditions],
             e: conditions_emoji(forecast[:conditions])

@@ -26,7 +26,7 @@ module SlackWeather
           {
             temperature: values[1].to_i,
             humidity: values[2].to_i,
-            wind: values[3],
+            wind: parse_wind(values),
             conditions: values[5]
           }
         end
@@ -48,6 +48,22 @@ module SlackWeather
 
     def doc
       @doc ||= Nokogiri::HTML::Document.parse(open(URL), nil, 'utf-8')
+    end
+
+    def parse_wind(values)
+      if values[3][' ']
+        {
+          bf: values[3].to_i,
+          kph: values[4].to_i,
+          direction: values[3][/([ΒΑΝΔ][ΑΔ]?)/]
+        }
+      else
+        {
+          bf: 0,
+          kph: 0,
+          direction: ''
+        }
+      end
     end
 
     def scrape_sunrise_and_sunset!
