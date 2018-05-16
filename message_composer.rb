@@ -46,12 +46,13 @@ module SlackWeather
           dust = "*#{dust}*" if %w[ΥΨΗΛΗ ΜΕΣΑΙΑ].include?(dust)
 
           sprintf(
-            '%{hr} %{he} %{t}, υγρασία %{h}%%, %{w}, σκόνη %{d}, %{c} %{e}',
+            '%{hr} %{he} %{t}, υγρασία %{h}%%, %{we} %{w}, σκόνη %{d}, %{c} %{e}',
             hr: sprintf('%02d:00', hour),
             he: hour_emoji(hour),
             t: temp,
             h: forecast[:humidity],
             w: wind,
+            we: wind_emoji(forecast[:wind][:direction]),
             d: dust,
             c: forecast[:conditions],
             e: conditions_emoji(forecast[:conditions])
@@ -80,6 +81,19 @@ module SlackWeather
 
     def self.hour_emoji(hour)
       ":clock#{hour % 12}:"
+    end
+
+    def self.wind_emoji(direction)
+      case direction
+      when 'Β' then ':arrow_down:'
+      when 'ΒΑ' then ':arrow_lower_left:'
+      when 'Α' then ':arrow_left:'
+      when 'ΝΑ' then ':arrow_upper_left:'
+      when 'Ν' then ':arrow_up:'
+      when 'ΝΔ' then ':arrow_upper_right:'
+      when 'Δ' then ':arrow_right:'
+      when 'ΒΔ' then ':arrow_lower_right:'
+      end
     end
 
     def self.forecast_date
