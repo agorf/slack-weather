@@ -55,7 +55,7 @@ module SlackWeather
         {
           bf: values[3].to_i,
           kph: values[4].to_i,
-          direction: values[3][/([ΒBΑAΝNΔ][ΑAΔ]?)/]
+          direction: values[3].tr('BAN', 'ΒΑΝ')[/[ΒΝ][ΑΔ]?|[ΑΔ]/]
         }
       else
         {
