@@ -27,7 +27,7 @@ module SlackWeather
             temperature: values[1].to_i,
             humidity: values[2].to_i,
             wind: parse_wind(values),
-            conditions: values[5]
+            conditions: values[5] || values[4]
           }
         end
 
