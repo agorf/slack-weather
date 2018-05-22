@@ -45,18 +45,29 @@ module SlackWeather
           dust = dust_forecast[hour]
           dust = "*#{dust}*" if %w[ΥΨΗΛΗ ΜΕΣΑΙΑ].include?(dust)
 
-          sprintf(
-            '%{hr} %{he} %{t}, υγρασία %{h}%%, %{we} %{w}, σκόνη %{d}, %{c} %{e}',
-            hr: sprintf('%02d:00', hour),
-            he: hour_emoji(hour),
-            t: temp,
-            h: forecast[:humidity],
-            w: wind,
-            we: wind_emoji(forecast[:wind][:direction]),
-            d: dust,
-            c: forecast[:conditions],
-            e: conditions_emoji(forecast[:conditions])
-          )
+          [
+            [
+              sprintf('%02d:00', hour),
+              hour_emoji(hour),
+              temp
+            ].join(' '),
+            [
+              'υγρασία',
+              "#{forecast[:humidity]}%"
+            ].join(' '),
+            [
+              wind_emoji(forecast[:wind][:direction]),
+              wind
+            ].compact.join(' '),
+            [
+              'σκόνη',
+              dust
+            ].join(' '),
+            [
+              forecast[:conditions],
+              conditions_emoji(forecast[:conditions])
+            ].join(' ')
+          ].join(', ')
         }
       )
       lines << ''
