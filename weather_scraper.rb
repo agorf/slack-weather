@@ -38,16 +38,7 @@ module SlackWeather
       # Keep tomorrow's rows
       tr_nodes = tr_nodes.first(4)
 
-      forecast_rows =
-        tr_nodes.map do |tr_node|
-          text = tr_node.text.gsub(/^\s*|\s*$/, '').gsub(/\s+/, ' ')
-          {
-            temperature: parse_temperature(text),
-            humidity: parse_humidity(text),
-            wind: parse_wind(text),
-            conditions: parse_conditions(text)
-          }
-        end
+      forecast_rows = tr_nodes.map { |tr| parse_row_text(tr) }
 
       HOURS.zip(forecast_rows).to_h
     end
@@ -66,6 +57,14 @@ module SlackWeather
 
     def doc
       @doc ||= Nokogiri::HTML::Document.parse(open(URL), nil, 'utf-8')
+    end
+
+    def parse_row_text(tr_node)
+      text = tr_node.text.gsub(/^\s*|\s*$/, '').gsub(/\s+/, ' ')
+
+      %i[temperature humidity wind conditions].map { |attr|
+        [attr, send("parse_#{attr}", text)]
+      }.to_h
     end
 
     def parse_temperature(text)
