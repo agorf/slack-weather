@@ -27,7 +27,7 @@ module SlackWeather
           level = td.text.split(' ').first
           case level
           when 'ΥΨΗΛΗ', 'ΜΕΣΑΙΑ', 'ΧΑΜΗΛΗ' then level
-          when 'ΔΕΝ' then 'ΟΧΙ'
+          when 'ΔΕΝ' then 'ΚΑΘΟΛΟΥ'
           end
         end
 
