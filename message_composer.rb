@@ -32,14 +32,20 @@ module SlackWeather
           if forecast[:wind][:bf] == 0
             wind = 'ΑΠΝΟΙΑ'
           else
-            wind = forecast[:wind][:bf].to_s
+            wind = "#{forecast[:wind][:bf]} Bf"
 
             if forecast[:wind][:bf] >= 6
               wind = "*#{wind}*"
             end
 
-            wind << " Bf #{forecast[:wind][:direction]}" \
-              " (#{forecast[:wind][:kph]} km/h)"
+            wind << " #{forecast[:wind][:direction]}"
+            wind << " (#{forecast[:wind][:kph]} km/h"
+
+            if forecast[:wind][:bursts]
+              wind << ", ριπές #{forecast[:wind][:bursts]} km/h"
+            end
+
+            wind << ')'
           end
 
           dust = dust_forecast[hour]
