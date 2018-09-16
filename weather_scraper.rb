@@ -5,7 +5,9 @@ module SlackWeather
   class WeatherScraper
     HOURS = [3, 9, 15, 21].freeze
 
-    URL = 'http://meteo.gr/cf.cfm?city_id=12'.freeze
+    CITY_ID = ENV.fetch('SLACK_WEATHER_CITY_ID', '12') # 12 is Athens
+
+    URL = sprintf('http://meteo.gr/cf.cfm?city_id=%s', CITY_ID).freeze
 
     WIND_REGEX = %r{
       (?<bf>\d+)\sΜπφ\s
