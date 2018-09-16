@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'nokogiri'
-gem 'dotenv'
+gem 'dotenv', '~> 2.4.0'
+gem 'nokogiri', '~> 1.8.2'

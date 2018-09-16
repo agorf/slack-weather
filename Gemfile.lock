@@ -10,8 +10,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  dotenv
-  nokogiri
+  dotenv (~> 2.4.0)
+  nokogiri (~> 1.8.2)
 
 BUNDLED WITH
    1.16.1
