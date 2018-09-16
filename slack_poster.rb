@@ -6,7 +6,7 @@ require 'uri'
 
 module SlackWeather
   class SlackPoster
-    WEBHOOK_URL = ENV.fetch('WEBHOOK_URL').freeze
+    WEBHOOK_URL = ENV.fetch('SLACK_WEATHER_WEBHOOK_URL').freeze
 
     def self.post(message)
       payload = JSON.generate(text: message)
