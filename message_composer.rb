@@ -70,6 +70,7 @@ module SlackWeather
               dust
             ].join(' '),
             [
+              'συνθήκες',
               forecast[:conditions],
               conditions_emoji(forecast[:conditions])
             ].join(' ')
