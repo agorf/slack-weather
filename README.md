@@ -10,14 +10,26 @@ a [Slack][] channel.
 
 ## Installation
 
-Clone the repo and install the necessary [Gems][] using [Bundler][]:
+Clone the repo:
 
 ```sh
 git clone https://github.com/agorf/slack-weather.git
 cd slack-weather/
+```
+
+If you have [Docker][], you don't need Ruby, Bundler etc. Just build the image:
+
+```sh
+docker build -t slack_weather .
+```
+
+If you don't have [Docker][], install the necessary [Gems][] using [Bundler][]:
+
+```sh
 bundle install
 ```
 
+[Docker]: https://www.docker.com/
 [Gems]: https://rubygems.org/
 [Bundler]: https://bundler.io/
 
@@ -34,14 +46,22 @@ directory and they will be loaded automatically.
 
 ## Use
 
+If you have [Docker][]:
+
 ```sh
-bundle exec ruby slack_poster.rb
+SLACK_WEATHER_WEBHOOK_URL=... docker run --rm -e SLACK_WEATHER_WEBHOOK_URL slack_weather
+```
+
+If you don't:
+
+```sh
+SLACK_WEATHER_WEBHOOK_URL=... bundle exec ruby slack_poster.rb
 ```
 
 You can run this with [cron][] e.g. once per day at 5 pm:
 
 ```
-0 17 * * * bundle exec ruby slack_poster.rb
+0 17 * * * SLACK_WEATHER_WEBHOOK_URL=... bundle exec ruby slack_poster.rb
 ```
 
 [cron]: https://en.wikipedia.org/wiki/Cron
