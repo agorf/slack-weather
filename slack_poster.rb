@@ -1,5 +1,4 @@
 require_relative 'message_composer'
-require 'dotenv/load'
 require 'json'
 require 'net/http'
 require 'uri'
