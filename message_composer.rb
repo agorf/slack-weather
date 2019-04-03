@@ -38,6 +38,7 @@ module SlackWeather
               wind = "*#{wind}*"
             end
 
+            wind << " #{wind_emoji(forecast[:wind][:direction])}"
             wind << " #{forecast[:wind][:direction]}"
             wind << " (#{forecast[:wind][:kph]} km/h"
 
@@ -61,10 +62,7 @@ module SlackWeather
               'υγρασία',
               "#{forecast[:humidity]}%"
             ].join(' '),
-            [
-              wind_emoji(forecast[:wind][:direction]),
-              wind
-            ].compact.join(' '),
+            wind,
             [
               'σκόνη',
               dust
