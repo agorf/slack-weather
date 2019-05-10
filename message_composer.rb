@@ -63,12 +63,12 @@ module SlackWeather
               "#{forecast[:humidity]}%"
             ].join(' '),
             wind,
-            dust ? "σκόνη #{dust}" : nil,
             [
               'συνθήκες',
               forecast[:conditions],
               conditions_emoji(forecast[:conditions])
-            ].join(' ')
+            ].join(' '),
+            dust ? "σκόνη #{dust}" : nil
           ].compact.join(', ')
         }
       )
