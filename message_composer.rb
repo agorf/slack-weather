@@ -93,7 +93,9 @@ module SlackWeather
     end
 
     def self.hour_emoji(hour)
-      ":clock#{hour % 12}:"
+      hour %= 12
+      hour = 12 if hour == 0
+      ":clock#{hour}:"
     end
 
     def self.wind_emoji(direction)
