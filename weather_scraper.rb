@@ -3,7 +3,7 @@ require 'open-uri'
 
 module SlackWeather
   class WeatherScraper
-    HOURS = [3, 9, 15, 21].freeze
+    HOURS = [3, 6, 9, 12, 15, 18, 21, 24].freeze
 
     CITY_ID = ENV.fetch('SLACK_WEATHER_CITY_ID', '12') # 12 is Athens
 
@@ -33,12 +33,16 @@ module SlackWeather
 
       # Drop today's rows
       tr_nodes.shift if hour < 3
+      tr_nodes.shift if hour < 6
       tr_nodes.shift if hour < 9
+      tr_nodes.shift if hour < 12
       tr_nodes.shift if hour < 15
+      tr_nodes.shift if hour < 18
       tr_nodes.shift if hour < 21
+      tr_nodes.shift if hour <= 23
 
       # Keep tomorrow's rows
-      tr_nodes = tr_nodes.first(4)
+      tr_nodes = tr_nodes.first(HOURS.size)
 
       forecast_rows = tr_nodes.map { |tr| parse_row_text(tr) }
 
