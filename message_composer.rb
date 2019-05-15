@@ -56,10 +56,10 @@ module SlackWeather
             [
               sprintf('%02d:00', hour),
               hour_emoji(hour),
-              forecast[:conditions],
-              conditions_emoji(forecast[:conditions])
+              temp,
+              conditions_emoji(forecast[:conditions]),
+              forecast[:conditions]
             ].join(' '),
-            temp,
             "#{forecast[:humidity]}% υγρασία",
             wind,
             dust ? "#{dust} σκόνη" : nil
