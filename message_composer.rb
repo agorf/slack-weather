@@ -50,7 +50,7 @@ module SlackWeather
           end
 
           dust = dust_forecast[hour]
-          dust = "*#{dust}*" if %w[ΥΨΗΛΗ ΜΕΣΑΙΑ].include?(dust)
+          dust = dust.nil? || dust == 'ΚΑΘΟΛΟΥ' ? nil : "#{dust} σκόνη"
 
           [
             [
@@ -62,7 +62,7 @@ module SlackWeather
             ].join(' '),
             "#{forecast[:humidity]}% υγρασία",
             wind,
-            dust ? "#{dust} σκόνη" : nil
+            dust
           ].compact.join(', ')
         }
       )
